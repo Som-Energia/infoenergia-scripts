@@ -1,0 +1,6 @@
+cert.crt
+cert.key
+.DS_Store
+contracts/
+node_modules/
+contracts.json
