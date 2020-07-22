@@ -60,3 +60,39 @@ app.get('/data/distributionbytypeofuse/:contract', function (req, res) {
     res.json(contract._items[0].results.distributionByTypeOfUse)
   })
 })
+
+app.get('/data/weeklyprofile/:contract', function (req, res) {
+  fs = require('fs')
+  fs.readFile(`${CONTRACTS}${req.params.contract}.json`, 'utf8', (err, data) => {
+    if (err) {
+      return res.send(err)
+    }
+    const contract = JSON.parse(data)
+    const response = { ...contract._items[0].results.weeklyAvgConsumeLast12Months, updated: contract._items[0]._updated }
+    res.json(response)
+  })
+})
+
+app.get('/data/monthsprofile/:contract', function (req, res) {
+  fs = require('fs')
+  fs.readFile(`${CONTRACTS}${req.params.contract}.json`, 'utf8', (err, data) => {
+    if (err) {
+      return res.send(err)
+    }
+    const contract = JSON.parse(data)
+    const response = { ...contract._items[0].results.last3MonthsProfile, updated: contract._items[0]._updated }
+    res.json(response)
+  })
+})
+
+app.get('/data/seasonalprofile/:contract', function (req, res) {
+  fs = require('fs')
+  fs.readFile(`${CONTRACTS}${req.params.contract}.json`, 'utf8', (err, data) => {
+    if (err) {
+      return res.send(err)
+    }
+    const contract = JSON.parse(data)
+    const response = { ...contract._items[0].results.seasonalProfile, updated: contract._items[0]._updated }
+    res.json(response)
+  })
+})
