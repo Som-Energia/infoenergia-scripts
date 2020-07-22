@@ -96,3 +96,10 @@ app.get('/data/seasonalprofile/:contract', function (req, res) {
     res.json(response)
   })
 })
+
+app.get('/data/contracts', function (req, res) {
+  fs = require('fs')
+  const contracts = fs.readdirSync(`${CONTRACTS}`)
+  res.json(contracts.map(contract => contract.replace('.json','')))
+})
+
